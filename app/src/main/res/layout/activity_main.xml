@@ -25,6 +25,7 @@
 
     <Button
         android:id="@+id/btnquickmath"
+        android:onClick="btnQuickMathClicked"
         android:layout_width="280dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
@@ -42,6 +43,7 @@
 
     <Button
         android:id="@+id/btnchallenge"
+        android:onClick="btnChallengeClicked"
         android:layout_width="280dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
@@ -59,6 +61,7 @@
 
     <ImageView
         android:id="@+id/setting"
+        android:onClick="settingClicked"
         android:layout_width="107dp"
         android:layout_height="88dp"
         android:layout_marginTop="56dp"
@@ -70,6 +73,7 @@
 
     <ImageView
         android:id="@+id/rank"
+        android:onClick="rankClicked"
         android:layout_width="107dp"
         android:layout_height="88dp"
         android:layout_marginTop="56dp"
@@ -80,6 +84,7 @@
 
     <ImageView
         android:id="@+id/rule"
+        android:onClick="ruleClicked"
         android:layout_width="107dp"
         android:layout_height="88dp"
         android:layout_marginTop="56dp"
