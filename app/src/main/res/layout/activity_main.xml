@@ -34,6 +34,7 @@
         android:text="Quick Math"
         android:textColor="#FDF2FE"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,9 +51,43 @@
         android:text="Challenge"
         android:textColor="#FDF2FE"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnquickmath" />
+
+    <ImageView
+        android:id="@+id/setting"
+        android:layout_width="107dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="56dp"
+        android:src="@drawable/setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.006"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnchallenge" />
+
+    <ImageView
+        android:id="@+id/rank"
+        android:layout_width="107dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="56dp"
+        android:src="@drawable/rank"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnchallenge" />
+
+    <ImageView
+        android:id="@+id/rule"
+        android:layout_width="107dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="56dp"
+        android:src="@drawable/rule"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.996"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnchallenge" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
