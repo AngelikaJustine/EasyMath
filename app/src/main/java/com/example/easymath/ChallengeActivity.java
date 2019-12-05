@@ -11,7 +11,7 @@ import java.util.Locale;
 
 public class ChallengeActivity extends AppCompatActivity {
 
-    private static final long START_TIME_IN_MILLIS = 6000;
+    private static final long START_TIME_IN_MILLIS = 600000;
 
     TextView countDown, ofChallenge, txttrueanswerchallenge, txtallquestionchallenge;
     private CountDownTimer mCountDownTimer;
