@@ -5,18 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Locale;
+import java.util.Random;
 
 public class ChallengeActivity extends AppCompatActivity {
 
     private static final long START_TIME_IN_MILLIS = 600000;
 
-    TextView countDown, ofChallenge, txttrueanswerchallenge, txtallquestionchallenge;
+    private TextView countDown, ofChallenge, txttrueanswerchallenge, txtallquestionchallenge;
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+
+    private TextView challengequestion;
+    private Button btnans1, btnans2, btnans3, btnans4;
+
+    private int numb1, numb2, numb3, s1, s2;
+    private double total, ans1, ans2, ans3;
+
+    private Random random = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +38,29 @@ public class ChallengeActivity extends AppCompatActivity {
         txttrueanswerchallenge = findViewById(R.id.txttrueanswerchallenge);
         ofChallenge = findViewById(R.id.ofChallenge);
 
-        Typeface SolwayBold = Typeface.createFromAsset(getAssets(), "fonts/SolwayRegular.ttf");
-        Typeface SolwayMedium = Typeface.createFromAsset(getAssets(), "fonts/SolwayMedium.ttf");
+        challengequestion = findViewById(R.id.challengequestion);
+        btnans1 = findViewById(R.id.btnans1);
+        btnans2 = findViewById(R.id.btnans2);
+        btnans3 = findViewById(R.id.btnans3);
+        btnans4 = findViewById(R.id.btnans4);
 
-        countDown.setTypeface(SolwayBold);
+
+        Typeface SolwayRegular = Typeface.createFromAsset(getAssets(), "fonts/SolwayRegular.ttf");
+        Typeface SolwayMedium = Typeface.createFromAsset(getAssets(), "fonts/SolwayMedium.ttf");
+        Typeface SolwayBold = Typeface.createFromAsset(getAssets(), "fonts/SolwayBold.ttf");
+
+
+        countDown.setTypeface(SolwayRegular);
         txtallquestionchallenge.setTypeface(SolwayMedium);
         txttrueanswerchallenge.setTypeface(SolwayMedium);
         ofChallenge.setTypeface(SolwayMedium);
+        challengequestion.setTypeface(SolwayBold);
+        btnans1.setTypeface(SolwayBold);
+        btnans2.setTypeface(SolwayBold);
+        btnans3.setTypeface(SolwayBold);
+        btnans4.setTypeface(SolwayBold);
+
+        playgamechallenge();
 
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
@@ -45,11 +71,14 @@ public class ChallengeActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+
                 mTimerRunning = false;
+
             }
         }.start();
 
         mTimerRunning = true;
+
     }
 
     private void updateCountDownText() {
@@ -60,4 +89,115 @@ public class ChallengeActivity extends AppCompatActivity {
 
         countDown.setText(timeLeftFormatted);
     }
+
+    public void playgamechallenge(){
+        numb1 = random.nextInt(60) + 10;
+        numb2 = random.nextInt(40) + 10;
+        numb3 = random.nextInt(30) + 10;
+        s1 = random.nextInt(4);
+        s2 = random.nextInt(4);
+
+        while(s2 == s1){
+            s2 = random.nextInt(4);
+        }
+
+        printQuestion();
+
+        if(s2 >= 3 && s1 < 3){
+            double temp = countsubtotal(numb2, numb3, s2);
+            total = countsubtotal(numb1, temp, s1);
+        }
+        else {
+            double temp = countsubtotal(numb1, numb2, s1);
+            total = countsubtotal(temp, numb3, s2);
+        }
+
+        int pos = random.nextInt(4);
+
+        printAnswer(total, pos);
+
+    }
+
+    private double countsubtotal(double a, double b, int symbol){
+
+        if(symbol == 0){
+            return a + b;
+        }
+        else if(symbol == 1){
+            return a - b;
+        }
+        else if(symbol == 2){
+            return a * b;
+        }
+        else{
+            return a / b;
+        }
+    }
+
+    private void printQuestion(){
+
+        String temp = numb1 + printQuestionSymbol(s1) + numb2 + printQuestionSymbol(s2) + numb3;
+        challengequestion = findViewById(R.id.challengequestion);
+        challengequestion.setText(temp);
+
+    }
+
+    private String printQuestionSymbol(int s){
+
+        if(s == 0){
+            return " + ";
+        }
+        else if(s == 1){
+            return " - ";
+        }
+        else if(s == 2){
+            return " * ";
+        }
+        else{
+            return " / ";
+        }
+
+    }
+
+    private void printAnswer(double total, int pos){
+
+        btnans1 = findViewById(R.id.btnans1);
+        btnans2 = findViewById(R.id.btnans2);
+        btnans3 = findViewById(R.id.btnans3);
+        btnans4 = findViewById(R.id.btnans4);
+
+        int temp1 = random.nextInt(10) + 1;
+        int temp2 = random.nextInt(5) + 1;
+        int temp3 = random.nextInt(12) + 1;
+        int x = random.nextInt(2);
+        int y = random.nextInt(2);
+        int z = random.nextInt(2);
+
+        if(pos == 0){
+            btnans1.setText(String.valueOf(total));
+            btnans2.setText(String.valueOf(countsubtotal(total, temp1, x)));
+            btnans3.setText(String.valueOf(countsubtotal(total, temp2, y)));
+            btnans4.setText(String.valueOf(countsubtotal(total, temp3, z)));
+        }
+        else if(pos == 1){
+            btnans2.setText(String.valueOf(total));
+            btnans1.setText(String.valueOf(countsubtotal(total, temp1, x)));
+            btnans3.setText(String.valueOf(countsubtotal(total, temp2, y)));
+            btnans4.setText(String.valueOf(countsubtotal(total, temp3, z)));
+        }
+        else if(pos == 2){
+            btnans3.setText(String.valueOf(total));
+            btnans1.setText(String.valueOf(countsubtotal(total, temp1, x)));
+            btnans2.setText(String.valueOf(countsubtotal(total, temp2, y)));
+            btnans4.setText(String.valueOf(countsubtotal(total, temp3, z)));
+        }
+        else{
+            btnans4.setText(String.valueOf(total));
+            btnans1.setText(String.valueOf(countsubtotal(total, temp1, x)));
+            btnans2.setText(String.valueOf(countsubtotal(total, temp2, y)));
+            btnans3.setText(String.valueOf(countsubtotal(total, temp3, z)));
+        }
+    }
+
+
 }
