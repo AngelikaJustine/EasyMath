@@ -2,9 +2,13 @@ package com.example.easymath;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -13,7 +17,7 @@ import java.util.Random;
 
 public class ChallengeActivity extends AppCompatActivity {
 
-    private static final long START_TIME_IN_MILLIS = 600000;
+    private static final long START_TIME_IN_MILLIS = 60000;
 
     private TextView countDown, ofChallenge, txttrueanswerchallenge, txtallquestionchallenge;
     private CountDownTimer mCountDownTimer;
@@ -25,6 +29,7 @@ public class ChallengeActivity extends AppCompatActivity {
 
     private int numb1, numb2, numb3, s1, s2;
     private double total, ans1, ans2, ans3;
+    private int totalQuestion, totalRight;
 
     private Random random = new Random();
 
@@ -44,11 +49,12 @@ public class ChallengeActivity extends AppCompatActivity {
         btnans3 = findViewById(R.id.btnans3);
         btnans4 = findViewById(R.id.btnans4);
 
+        totalQuestion = 0;
+        totalRight = 0;
 
         Typeface SolwayRegular = Typeface.createFromAsset(getAssets(), "fonts/SolwayRegular.ttf");
         Typeface SolwayMedium = Typeface.createFromAsset(getAssets(), "fonts/SolwayMedium.ttf");
         Typeface SolwayBold = Typeface.createFromAsset(getAssets(), "fonts/SolwayBold.ttf");
-
 
         countDown.setTypeface(SolwayRegular);
         txtallquestionchallenge.setTypeface(SolwayMedium);
@@ -73,12 +79,18 @@ public class ChallengeActivity extends AppCompatActivity {
             public void onFinish() {
 
                 mTimerRunning = false;
+                gameOver();
 
             }
         }.start();
 
         mTimerRunning = true;
 
+    }
+
+    private void gameOver() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     private void updateCountDownText() {
@@ -91,6 +103,16 @@ public class ChallengeActivity extends AppCompatActivity {
     }
 
     public void playgamechallenge(){
+        totalQuestion = totalQuestion + 1;
+        btnans1 = findViewById(R.id.btnans1);
+        btnans2 = findViewById(R.id.btnans2);
+        btnans3 = findViewById(R.id.btnans3);
+        btnans4 = findViewById(R.id.btnans4);
+        btnans1.setEnabled(true);
+        btnans2.setEnabled(true);
+        btnans3.setEnabled(true);
+        btnans4.setEnabled(true);
+
         numb1 = random.nextInt(60) + 10;
         numb2 = random.nextInt(40) + 10;
         numb3 = random.nextInt(30) + 10;
@@ -199,5 +221,79 @@ public class ChallengeActivity extends AppCompatActivity {
         }
     }
 
+    private boolean checkPrime(int number){
+        for(int i=2; i<=number/2; i++){
+            if(number % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
 
+    public void btnClicked(View view){
+        btnans1 = findViewById(R.id.btnans1);
+        btnans2 = findViewById(R.id.btnans2);
+        btnans3 = findViewById(R.id.btnans3);
+        btnans4 = findViewById(R.id.btnans4);
+        btnans1.setEnabled(false);
+        btnans2.setEnabled(false);
+        btnans3.setEnabled(false);
+        btnans4.setEnabled(false);
+
+        Button btn = findViewById(R.id.btnans1);
+        double values = 0;
+
+        switch (view.getId()) {
+
+            case R.id.btnans1:
+                btn = findViewById(R.id.btnans1);
+                values = Double.parseDouble(btn.getText().toString());
+                break;
+
+            case R.id.btnans2:
+                btn = findViewById(R.id.btnans2);
+                values = Double.parseDouble(btn.getText().toString());
+                break;
+
+            case R.id.btnans3:
+                btn = findViewById(R.id.btnans3);
+                values = Double.parseDouble(btn.getText().toString());
+                break;
+
+            case R.id.btnans4:
+                btn = findViewById(R.id.btnans4);
+                values = Double.parseDouble(btn.getText().toString());
+                break;
+        }
+
+
+        if(values == total) {
+            btn.setBackgroundColor(Color.rgb(142, 255, 142));
+            totalRight = totalRight + 1;
+        }
+        else{
+            btn.setBackgroundColor(Color.rgb(255, 88, 88));
+
+        }
+
+        final Button finalBtn = btn;
+        updateTotalQuestion();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finalBtn.setBackgroundColor(Color.rgb(253, 242, 254));
+                playgamechallenge();
+            }
+        }, 500);
+
+    }
+
+    private void updateTotalQuestion(){
+        txtallquestionchallenge = findViewById(R.id.txtallquestionchallenge);
+        txttrueanswerchallenge = findViewById(R.id.txttrueanswerchallenge);
+
+        txtallquestionchallenge.setText(String.valueOf(totalQuestion));
+        txttrueanswerchallenge.setText(String.valueOf(totalRight));
+    }
 }
