@@ -28,7 +28,7 @@ public class ChallengeActivity extends AppCompatActivity {
     private Button btnans1, btnans2, btnans3, btnans4;
 
     private int numb1, numb2, numb3, s1, s2;
-    private double total, ans1, ans2, ans3;
+    private double total;
     private int totalQuestion, totalRight;
 
     private Random random = new Random();
