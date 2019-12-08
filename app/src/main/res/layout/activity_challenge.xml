@@ -7,16 +7,146 @@
     tools:context=".ChallengeActivity"
     android:background="@color/blue">
 
-    <TextView
-        android:id="@+id/countDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:alpha="0.5"
+        android:background="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintHorizontal_bias="0.122"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.071" />
+        app:layout_constraintVertical_bias="0.07">
+
+        <TextView
+            android:id="@+id/countDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingTop="4dp"
+            android:textColor="@color/blue"
+            android:textSize="35sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.864"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07">
+
+        <TextView
+            android:id="@+id/txttrueanswerchallenge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="35dp" />
+
+        <TextView
+            android:id="@+id/ofChallenge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="OF"
+            android:textSize="35dp" />
+
+        <TextView
+            android:id="@+id/txtallquestionchallenge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="35dp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/challengequestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12 / 6 + 3"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout1"
+        app:layout_constraintVertical_bias="0.115" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/challengequestion"
+        app:layout_constraintVertical_bias="0.596">
+
+        <Button
+            android:id="@+id/btnans1"
+            android:layout_width="156dp"
+            android:layout_height="164dp"
+            android:elevation="5dp"
+            android:background="@color/white"
+            android:text="27"
+            android:textSize="40sp"
+            android:onClick="btnClicked"
+            />
+
+        <Button
+            android:id="@+id/btnans3"
+            android:layout_width="156dp"
+            android:layout_height="164dp"
+            android:elevation="5dp"
+            android:layout_below="@+id/btnans1"
+            android:layout_marginTop="40dp"
+            android:background="@color/white"
+            android:text="37"
+            android:textSize="40sp"
+            android:onClick="btnClicked"
+            />
+
+        <Button
+            android:id="@+id/btnans2"
+            android:layout_width="156dp"
+            android:layout_height="164dp"
+            android:elevation="5dp"
+            android:layout_marginLeft="40dp"
+            android:layout_toRightOf="@+id/btnans1"
+            android:background="@color/white"
+            android:text="30"
+            android:textSize="40sp"
+            android:onClick="btnClicked"
+            />
+
+        <Button
+            android:id="@+id/btnans4"
+            android:layout_width="156dp"
+            android:layout_height="164dp"
+            android:layout_below="@+id/btnans2"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_toRightOf="@+id/btnans3"
+            android:background="@color/white"
+            android:text="40"
+            android:textSize="40sp"
+            android:onClick="btnClicked"
+            />
+
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
