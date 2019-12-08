@@ -125,6 +125,17 @@ public class ChallengeActivity extends AppCompatActivity {
             s2 = random.nextInt(4);
         }
 
+        if(s1 == 4){
+            while(checkPrime(numb1)){
+                numb1 = random.nextInt(60) + 10;
+            }
+            float temp = numb1 / numb2;
+            while(temp % 1 != 0 ){
+                numb2 = random.nextInt(20) + 5;
+                temp = numb1 / numb2;
+            }
+        }
+
         printQuestion();
 
         if(s2 >= 3 && s1 < 3){
