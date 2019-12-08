@@ -2,12 +2,14 @@ package com.example.easymath;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -89,6 +91,40 @@ public class ChallengeActivity extends AppCompatActivity {
     }
 
     private void gameOver() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.alert_dialog, null);
+
+        Button playButton = view.findViewById(R.id.playButton);
+        Button quitButton = view.findViewById(R.id.quitButton);
+
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnPlayClicked();
+            }
+        });
+
+        quitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnQuitClicked();
+            }
+        });
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setView(view)
+                .create();
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        alertDialog.show();
+    }
+
+    private void btnPlayClicked(){
+        Intent intent = new Intent(this, ChallengeActivity.class);
+        startActivity(intent);
+    }
+
+    private void btnQuitClicked(){
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -131,8 +167,18 @@ public class ChallengeActivity extends AppCompatActivity {
             }
             float temp = numb1 / numb2;
             while(temp % 1 != 0 ){
-                numb2 = random.nextInt(20) + 5;
+                numb2 = random.nextInt(30) + 5;
                 temp = numb1 / numb2;
+            }
+        }
+        else if(s1 < 3 && s2 == 4){
+            while(checkPrime(numb1)){
+                numb2 = random.nextInt(40) + 10;
+            }
+            float temp = numb2 / numb3;
+            while(temp % 1 != 0 ){
+                numb3 = random.nextInt(20) + 5;
+                temp = numb2 / numb3;
             }
         }
 
