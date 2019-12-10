@@ -94,7 +94,8 @@
             android:elevation="5dp"
             android:text="27"
             android:textSize="40sp"
-            android:fontFamily="@font/solwaybold"/>
+            android:fontFamily="@font/solwaybold"
+            android:onClick="btnClicked"/>
 
         <Button
             android:id="@+id/btnans3"
@@ -106,7 +107,8 @@
             android:elevation="5dp"
             android:text="37"
             android:textSize="40sp"
-            android:fontFamily="@font/solwaybold"/>
+            android:fontFamily="@font/solwaybold"
+            android:onClick="btnClicked"/>
 
         <Button
             android:id="@+id/btnans2"
@@ -118,7 +120,8 @@
             android:elevation="5dp"
             android:text="30"
             android:textSize="40sp"
-            android:fontFamily="@font/solwaybold"/>
+            android:fontFamily="@font/solwaybold"
+            android:onClick="btnClicked"/>
 
         <Button
             android:id="@+id/btnans4"
@@ -131,7 +134,8 @@
             android:background="@color/white"
             android:text="40"
             android:textSize="40sp"
-            android:fontFamily="@font/solwaybold"/>
+            android:fontFamily="@font/solwaybold"
+            android:onClick="btnClicked"/>
 
     </RelativeLayout>
 
