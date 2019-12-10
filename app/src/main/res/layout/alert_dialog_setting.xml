@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:fontFamily="@fonts/solwayExtraBold"
+            android:fontFamily="@font/solwayextrabold"
             android:text="Settings"
             android:textColor="@color/colorPrimary"
             android:textSize="35sp"
@@ -32,6 +32,7 @@
             android:background="@drawable/circlebackground"
             android:gravity="center"
             android:text="X"
+            android:fontFamily="@font/solwayextrabold"
             android:textColor="@color/black"
             android:textStyle="bold" />
     </LinearLayout>

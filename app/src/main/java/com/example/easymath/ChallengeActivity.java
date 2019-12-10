@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class ChallengeActivity extends AppCompatActivity {
 
-    private static final long START_TIME_IN_MILLIS = 60000;
+    private static final long START_TIME_IN_MILLIS = 10000;
 
     private TextView countDown, ofChallenge, txttrueanswerchallenge, txtallquestionchallenge;
     private CountDownTimer mCountDownTimer;
@@ -30,7 +30,7 @@ public class ChallengeActivity extends AppCompatActivity {
     private Button btnans1, btnans2, btnans3, btnans4;
 
     private int numb1, numb2, numb3, s1, s2;
-    private double total;
+    private int total;
     private int totalQuestion, totalRight;
 
     private Random random = new Random();
@@ -94,6 +94,9 @@ public class ChallengeActivity extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.alert_dialog, null);
 
+        TextView score = view.findViewById(R.id.score);
+        int totalScore = totalRight * 10;
+        score.setText(String.valueOf(totalScore));
         Button playButton = view.findViewById(R.id.playButton);
         Button quitButton = view.findViewById(R.id.quitButton);
 
@@ -122,6 +125,7 @@ public class ChallengeActivity extends AppCompatActivity {
     private void btnPlayClicked(){
         Intent intent = new Intent(this, ChallengeActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void btnQuitClicked(){
@@ -151,9 +155,9 @@ public class ChallengeActivity extends AppCompatActivity {
         btnans3.setEnabled(true);
         btnans4.setEnabled(true);
 
-        numb1 = random.nextInt(60) + 10;
-        numb2 = random.nextInt(40) + 10;
-        numb3 = random.nextInt(30) + 10;
+        numb1 = random.nextInt(10) + 5;
+        numb2 = random.nextInt(12) + 3;
+        numb3 = random.nextInt(13) + 2;
         s1 = random.nextInt(4);
         s2 = random.nextInt(4);
 
@@ -161,35 +165,50 @@ public class ChallengeActivity extends AppCompatActivity {
             s2 = random.nextInt(4);
         }
 
-        if(s1 == 4){
+        if(s1 == 3){
             while(checkPrime(numb1)){
-                numb1 = random.nextInt(60) + 10;
+                numb1 = random.nextInt(10) + 5;
             }
-            float temp = numb1 / numb2;
-            while(temp % 1 != 0 ){
-                numb2 = random.nextInt(30) + 5;
-                temp = numb1 / numb2;
+            float x = numb1;
+            float temp = x / numb2;
+            while(temp != Math.rint(temp) ){
+                numb2 = random.nextInt(12) + 3;
+                temp = x / numb2;
             }
         }
-        else if(s1 < 3 && s2 == 4){
-            while(checkPrime(numb1)){
-                numb2 = random.nextInt(40) + 10;
+
+        else if(s1 < 2 && s2 == 3){
+            while(checkPrime(numb2)){
+                numb2 = random.nextInt(12) + 3;
             }
-            float temp = numb2 / numb3;
-            while(temp % 1 != 0 ){
-                numb3 = random.nextInt(20) + 5;
-                temp = numb2 / numb3;
+            float x = numb2;
+            float temp = x / numb3;
+            while(temp != Math.rint(temp) ){
+                numb3 = random.nextInt(13) + 2;
+                temp = x / numb3;
+            }
+        }
+        else if(s1 == 2 && s2 == 3){
+            while(checkPrime(numb1 * numb2)){
+                numb1 = random.nextInt(10) + 5;
+                numb2 = random.nextInt(12) + 3;
+            }
+            float x = numb1 * numb2;
+            float temp = x / numb3;
+            while(temp != Math.rint(temp) ){
+                numb3 = random.nextInt(13) + 2;
+                temp = x / numb3;
             }
         }
 
         printQuestion();
 
         if(s2 >= 3 && s1 < 3){
-            double temp = countsubtotal(numb2, numb3, s2);
+            int temp = countsubtotal(numb2, numb3, s2);
             total = countsubtotal(numb1, temp, s1);
         }
         else {
-            double temp = countsubtotal(numb1, numb2, s1);
+            int temp = countsubtotal(numb1, numb2, s1);
             total = countsubtotal(temp, numb3, s2);
         }
 
@@ -199,7 +218,7 @@ public class ChallengeActivity extends AppCompatActivity {
 
     }
 
-    private double countsubtotal(double a, double b, int symbol){
+    private int countsubtotal(int a, int b, int symbol){
 
         if(symbol == 0){
             return a + b;
@@ -240,7 +259,7 @@ public class ChallengeActivity extends AppCompatActivity {
 
     }
 
-    private void printAnswer(double total, int pos){
+    private void printAnswer(int total, int pos){
 
         btnans1 = findViewById(R.id.btnans1);
         btnans2 = findViewById(R.id.btnans2);
