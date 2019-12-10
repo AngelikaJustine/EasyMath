@@ -2,6 +2,7 @@ package com.example.easymath;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +22,7 @@ public class LevelOne extends AppCompatActivity {
     private Button btnans1, btnans2, btnans3, btnans4, numberQuestion;
 
     private int numb1, numb2;
-    private int answer, totalQuestion;
+    private int answer, totalQuestion, coin;
 
     private Random random = new Random();
 
@@ -32,21 +33,29 @@ public class LevelOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_one);
 
+
         level1question = findViewById(R.id.level1question);
         totalcoin = findViewById(R.id.totalcoin);
+        numberQuestion = findViewById(R.id.numberQuestion);
         btnans1 = findViewById(R.id.btnans1);
-        btnans2 = findViewById(R.id.btnans1);
+        btnans2 = findViewById(R.id.btnans2);
         btnans3 = findViewById(R.id.btnans3);
         btnans4 = findViewById(R.id.btnans4);
-        numberQuestion = findViewById(R.id.numberQuestion);
 
         NextQuestion = true;
+        totalQuestion = 1;
+        coin = 10;
 
         playgame();
     }
 
     public void playgame(){
         level1question = findViewById(R.id.level1question);
+        totalcoin = findViewById(R.id.totalcoin);
+        numberQuestion = findViewById(R.id.numberQuestion);
+
+        totalcoin.setText(String.valueOf(coin));
+        numberQuestion.setText(String.valueOf(totalQuestion));
 
         btnans1 = findViewById(R.id.btnans1);
         btnans2 = findViewById(R.id.btnans2);
@@ -149,6 +158,7 @@ public class LevelOne extends AppCompatActivity {
                 @Override
                 public void run() {
                     finalBtn.setBackgroundColor(Color.rgb(253, 242, 254));
+                    updateAfterCorrect();
                     playgame();
                 }
             }, 500);
@@ -156,8 +166,21 @@ public class LevelOne extends AppCompatActivity {
         }
         else {
             // Pop up for stop game
+            backtolevel();
         }
 
+    }
+
+    private void backtolevel(){
+        Intent intent = new Intent(this, Level.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void updateAfterCorrect(){
+        coin = coin + 1;
+        totalQuestion = totalQuestion + 1;
     }
 
 
