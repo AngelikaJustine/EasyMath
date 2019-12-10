@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,15 +11,123 @@
         android:id="@+id/txtRule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="100dp"
         android:text="RULES"
         android:textColor="@color/white"
         android:textSize="60sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.078"/>
+        android:textStyle="bold"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp">
+
+        <TextView
+            android:layout_width="230dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="* Quick Math"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="350dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="1. Terdapat 5 level pada game mode ini dan hanya level 1 yang bisa dimainkan, sementara level-level lainnya masih terkunci. "
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="normal" />
+        <TextView
+            android:layout_width="350dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="2. Untuk bisa membuka dan memainkan level 2, pemain harus terlebih dahulu menyelesaikan 10 soal pada level 1 dengan benar."
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="normal" />
+        <TextView
+            android:layout_width="350dp"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="3. Apabila ada 1 kesalahan, maka akan dianggap gugur dan harus mengulang mengerjakan level 1 lagi."
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="normal" />
+        <TextView
+            android:layout_width="350dp"
+            android:layout_marginTop="220dp"
+            android:layout_marginLeft="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="4. Rules pada nomor 2 dan nomor 3 berlaku untuk membuka dan memainkan level-level lainnya."
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp">
+
+        <TextView
+            android:layout_width="230dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="* Challenge"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="350dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="1. Terdapat waktu pada mode ini dengan durasi 10 menit untuk mengerjakan soal-soal yang diberikan. "
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="normal" />
+        <TextView
+            android:layout_width="350dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="2. Soal-soal yang diberikan jumlahnya tidak terbatas dan permainan akan berakhir saat durasi waktu tersebut telah habis."
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="normal" />
+        <TextView
+            android:layout_width="350dp"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="3. Untuk setiap jawaban benar akan mendapat score sebesar 10."
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="normal" />
+        <TextView
+            android:layout_width="350dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="4. 3 Pemain yang memiliki score tertinggi dapat dilihat di menu High Score."
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+</RelativeLayout>
