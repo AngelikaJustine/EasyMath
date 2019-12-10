@@ -151,10 +151,11 @@
         android:background="@color/green"
         android:text="50 : 50"
         app:layout_constraintVertical_bias="0.515"
-        android:fontFamily="@font/solwaymedium"/>
+        android:fontFamily="@font/solwaymedium"
+        android:onClick="halfClicked"/>
 
     <Button
-        android:id="@+id/skipquestioin"
+        android:id="@+id/skipquestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/green"
@@ -165,7 +166,8 @@
         app:layout_constraintHorizontal_bias="0.907"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rlbtnanswer"
-        app:layout_constraintVertical_bias="0.545" />
+        app:layout_constraintVertical_bias="0.545"
+        android:onClick="skipClicked"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

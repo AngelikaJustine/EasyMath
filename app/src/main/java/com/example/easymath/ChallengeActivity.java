@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class ChallengeActivity extends AppCompatActivity {
 
-    private static final long START_TIME_IN_MILLIS = 10000;
+    private static final long START_TIME_IN_MILLIS = 60000;
 
     private TextView countDown, ofChallenge, txttrueanswerchallenge, txtallquestionchallenge;
     private CountDownTimer mCountDownTimer;
@@ -203,7 +203,7 @@ public class ChallengeActivity extends AppCompatActivity {
 
         printQuestion();
 
-        if(s2 >= 3 && s1 < 3){
+        if(s2 >= 2 && s1 < 2){
             int temp = countsubtotal(numb2, numb3, s2);
             total = countsubtotal(numb1, temp, s1);
         }

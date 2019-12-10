@@ -19,7 +19,7 @@ import java.util.Random;
 public class LevelOne extends AppCompatActivity {
 
     private TextView level1question, totalcoin;
-    private Button btnans1, btnans2, btnans3, btnans4, numberQuestion;
+    private Button btnans1, btnans2, btnans3, btnans4, numberQuestion, skipquestion, halfanswer;
 
     private int numb1, numb2;
     private int answer, totalQuestion, coin;
@@ -33,15 +33,6 @@ public class LevelOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_one);
 
-
-        level1question = findViewById(R.id.level1question);
-        totalcoin = findViewById(R.id.totalcoin);
-        numberQuestion = findViewById(R.id.numberQuestion);
-        btnans1 = findViewById(R.id.btnans1);
-        btnans2 = findViewById(R.id.btnans2);
-        btnans3 = findViewById(R.id.btnans3);
-        btnans4 = findViewById(R.id.btnans4);
-
         NextQuestion = true;
         totalQuestion = 1;
         coin = 10;
@@ -51,20 +42,13 @@ public class LevelOne extends AppCompatActivity {
 
     public void playgame(){
         level1question = findViewById(R.id.level1question);
-        totalcoin = findViewById(R.id.totalcoin);
         numberQuestion = findViewById(R.id.numberQuestion);
 
-        totalcoin.setText(String.valueOf(coin));
         numberQuestion.setText(String.valueOf(totalQuestion));
 
-        btnans1 = findViewById(R.id.btnans1);
-        btnans2 = findViewById(R.id.btnans2);
-        btnans3 = findViewById(R.id.btnans3);
-        btnans4 = findViewById(R.id.btnans4);
-        btnans1.setEnabled(true);
-        btnans2.setEnabled(true);
-        btnans3.setEnabled(true);
-        btnans4.setEnabled(true);
+        checkcoin();
+
+        buttonresetall();
 
         numb1 = random.nextInt(40) + 5;
         numb2 = random.nextInt(20) + 5;
@@ -78,12 +62,52 @@ public class LevelOne extends AppCompatActivity {
 
     }
 
+    private void buttonresetall() {
+        btnans1 = findViewById(R.id.btnans1);
+        btnans2 = findViewById(R.id.btnans2);
+        btnans3 = findViewById(R.id.btnans3);
+        btnans4 = findViewById(R.id.btnans4);
+
+        btnans1.setClickable(true);
+        btnans2.setClickable(true);
+        btnans3.setClickable(true);
+        btnans4.setClickable(true);
+
+        btnans1.setEnabled(true);
+        btnans2.setEnabled(true);
+        btnans3.setEnabled(true);
+        btnans4.setEnabled(true);
+
+        btnans1.setBackgroundColor(Color.rgb(253, 242, 254));
+        btnans2.setBackgroundColor(Color.rgb(253, 242, 254));
+        btnans3.setBackgroundColor(Color.rgb(253, 242, 254));
+        btnans4.setBackgroundColor(Color.rgb(253, 242, 254));
+    }
+
+    private void checkcoin() {
+        skipquestion = findViewById(R.id.skipquestion);
+        halfanswer = findViewById(R.id.halfanswer);
+
+        if(coin < 3){
+            skipquestion.setClickable(false);
+            skipquestion.setAlpha(0);
+        }
+
+        if(coin < 2){
+            halfanswer.setClickable(false);
+            halfanswer.setAlpha(0);
+        }
+
+        totalcoin = findViewById(R.id.totalcoin);
+        totalcoin.setText(String.valueOf(coin));
+    }
+
     private void printAnswer(){
         List<Integer> list = new ArrayList<Integer>();
 
         int rand1 = random.nextInt(10) + 5;
         int rand2 = random.nextInt(5) + 5;
-        int rand3 = random.nextInt(10);
+        int rand3 = random.nextInt(10) + 1;
 
         btnans1 = findViewById(R.id.btnans1);
         btnans2 = findViewById(R.id.btnans2);
@@ -121,22 +145,22 @@ public class LevelOne extends AppCompatActivity {
 
             case R.id.btnans1:
                 btn = findViewById(R.id.btnans1);
-                values = Double.parseDouble(btn.getText().toString());
+                values = Integer.parseInt(btn.getText().toString());
                 break;
 
             case R.id.btnans2:
                 btn = findViewById(R.id.btnans2);
-                values = Double.parseDouble(btn.getText().toString());
+                values = Integer.parseInt(btn.getText().toString());
                 break;
 
             case R.id.btnans3:
                 btn = findViewById(R.id.btnans3);
-                values = Double.parseDouble(btn.getText().toString());
+                values = Integer.parseInt(btn.getText().toString());
                 break;
 
             case R.id.btnans4:
                 btn = findViewById(R.id.btnans4);
-                values = Double.parseDouble(btn.getText().toString());
+                values = Integer.parseInt(btn.getText().toString());
                 break;
         }
 
@@ -147,6 +171,10 @@ public class LevelOne extends AppCompatActivity {
         }
         else{
             btn.setBackgroundColor(Color.rgb(255, 88, 88));
+            NextQuestion = false;
+        }
+
+        if(totalQuestion == 10){
             NextQuestion = false;
         }
 
@@ -165,15 +193,27 @@ public class LevelOne extends AppCompatActivity {
 
         }
         else {
-            // Pop up for stop game
-            backtolevel();
+            if(totalQuestion != 10){
+                // Pop up for stop game before correct 10
+                backtolevel();
+            }
+            else{
+                // Pop up for stop game to next level
+                nextlevel();
+            }
+
         }
 
     }
 
+    private void nextlevel() {
+        Intent intent = new Intent(this, LevelTwo.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void backtolevel(){
         Intent intent = new Intent(this, Level.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }
@@ -184,5 +224,81 @@ public class LevelOne extends AppCompatActivity {
     }
 
 
+    public void halfClicked(View view) {
+        coin = coin - 2;
 
+        checkcoin();
+
+        btnans1 = findViewById(R.id.btnans1);
+        btnans2 = findViewById(R.id.btnans2);
+        btnans3 = findViewById(R.id.btnans3);
+
+        int value1 = Integer.parseInt(btnans1.getText().toString());
+        int value2 = Integer.parseInt(btnans2.getText().toString());
+        int value3 = Integer.parseInt(btnans3.getText().toString());
+
+        if(value1 == answer){
+            chooseoff(0);
+        }
+        else if(value2 == answer){
+            chooseoff(1);
+        }
+        else if(value3 == answer){
+            chooseoff(2);
+        }
+        else{
+            chooseoff(3);
+        }
+
+    }
+
+    private void chooseoff(int x) {
+        int off1 = random.nextInt(4);
+
+        while (off1 == x){
+            off1 = random.nextInt(4);
+        }
+
+        int off2 = random.nextInt(4);
+
+        while (off2 == x){
+            off2 = random.nextInt(4);
+        }
+
+        while (off2 == off1){
+            off2 = random.nextInt(4);
+        }
+
+        ChangeColor(off1);
+        ChangeColor(off2);
+    }
+
+    public void ChangeColor(int p){
+        btnans1 = findViewById(R.id.btnans1);
+        btnans2 = findViewById(R.id.btnans2);
+        btnans3 = findViewById(R.id.btnans3);
+        btnans4 = findViewById(R.id.btnans4);
+
+        if(p == 0) {
+            btnans1.setClickable(false);
+            btnans1.setBackgroundColor(Color.rgb(255, 88, 88));
+        }
+        else if(p == 1){
+            btnans2.setClickable(false);
+            btnans2.setBackgroundColor(Color.rgb(255, 88, 88));
+        }
+        else if(p == 2){
+            btnans3.setClickable(false);
+            btnans3.setBackgroundColor(Color.rgb(255, 88, 88));
+        }
+        else if(p == 3){
+            btnans4.setClickable(false);
+            btnans4.setBackgroundColor(Color.rgb(255, 88, 88));
+        }
+    }
+
+    public void skipClicked(View view) {
+        coin = coin - 3;
+        playgame();
+    }
 }

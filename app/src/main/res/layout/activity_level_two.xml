@@ -4,6 +4,171 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LevelTwo">
+    tools:context=".LevelTwo"
+    android:background="@color/blue">
+
+
+    <ImageView
+        android:id="@+id/imgcoin"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/coin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/rlbtnanswer"
+        app:layout_constraintEnd_toStartOf="@+id/numberQuestion"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imgcoin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.068">
+
+        <TextView
+            android:id="@+id/totalcoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:fontFamily="@font/solwaybold"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/numberQuestion"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/btnquestionnumber"
+        android:clickable="false"
+        android:text="1"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.069"
+        android:fontFamily="@font/solwayextrabold"/>
+
+    <TextView
+        android:id="@+id/level1question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="16 + 3"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/numberQuestion"
+        app:layout_constraintVertical_bias="0.062"
+        android:fontFamily="@font/solwayextrabold"/>
+
+    <RelativeLayout
+        android:id="@+id/rlbtnanswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/level1question"
+        app:layout_constraintVertical_bias="0.302">
+
+        <Button
+            android:id="@+id/btnans1"
+            android:layout_width="156dp"
+            android:layout_height="164dp"
+            android:background="@color/white"
+            android:elevation="5dp"
+            android:text="27"
+            android:textSize="40sp"
+            android:fontFamily="@font/solwaybold"
+            android:onClick="btnClicked"/>
+
+        <Button
+            android:id="@+id/btnans3"
+            android:layout_width="156dp"
+            android:layout_height="164dp"
+            android:layout_below="@+id/btnans1"
+            android:layout_marginTop="40dp"
+            android:background="@color/white"
+            android:elevation="5dp"
+            android:text="37"
+            android:textSize="40sp"
+            android:fontFamily="@font/solwaybold"
+            android:onClick="btnClicked"/>
+
+        <Button
+            android:id="@+id/btnans2"
+            android:layout_width="156dp"
+            android:layout_height="164dp"
+            android:layout_marginLeft="40dp"
+            android:layout_toRightOf="@+id/btnans1"
+            android:background="@color/white"
+            android:elevation="5dp"
+            android:text="30"
+            android:textSize="40sp"
+            android:fontFamily="@font/solwaybold"
+            android:onClick="btnClicked"/>
+
+        <Button
+            android:id="@+id/btnans4"
+            android:layout_width="156dp"
+            android:layout_height="164dp"
+            android:layout_below="@+id/btnans2"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_toRightOf="@+id/btnans3"
+            android:background="@color/white"
+            android:text="40"
+            android:textSize="40sp"
+            android:fontFamily="@font/solwaybold"
+            android:onClick="btnClicked"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/halfanswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.089"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rlbtnanswer"
+        android:background="@color/green"
+        android:text="50 : 50"
+        app:layout_constraintVertical_bias="0.515"
+        android:fontFamily="@font/solwaymedium"
+        android:onClick="halfClicked"/>
+
+    <Button
+        android:id="@+id/skipquestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:text="Skip"
+        android:fontFamily="@font/solwaymedium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.907"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rlbtnanswer"
+        app:layout_constraintVertical_bias="0.545"
+        android:onClick="skipClicked"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
