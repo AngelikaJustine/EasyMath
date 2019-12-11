@@ -117,7 +117,7 @@
             android:text="3. Untuk setiap jawaban benar akan mendapat score sebesar 10."
             android:textColor="@color/white"
             android:textSize="15sp"
-            android:textStyle="normal" />
+            android:textStyle="normal"/>
         <TextView
             android:layout_width="350dp"
             android:layout_marginTop="200dp"
