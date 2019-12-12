@@ -8,6 +8,19 @@
     android:background="#69cce0">
 
     <ImageView
+        android:id="@+id/info"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/info"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.005"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.002"
+        android:onClick="infoclicked"/>
+
+    <ImageView
         android:id="@+id/logo"
         android:layout_width="370dp"
         android:layout_height="313dp"
@@ -60,15 +73,15 @@
         app:layout_constraintTop_toBottomOf="@id/btnquickmath" />
 
     <ImageView
-        android:id="@+id/setting"
+        android:id="@+id/soundOn"
         android:layout_width="107dp"
         android:layout_height="88dp"
         android:layout_marginTop="56dp"
-        android:src="@drawable/setting"
+        android:src="@drawable/soundon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.006"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnchallenge" />
+        app:layout_constraintTop_toBottomOf="@id/btnchallenge"/>
 
     <ImageView
         android:id="@+id/rank"

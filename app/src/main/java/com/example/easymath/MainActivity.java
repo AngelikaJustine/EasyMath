@@ -32,6 +32,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        logo = findViewById(R.id.logo);
+        soundOn = findViewById(R.id.soundOn);
+        rank = findViewById(R.id.rank);
+        rule = findViewById(R.id.rule);
+        btnquickmath = findViewById(R.id.btnquickmath);
+        btnchallenge = findViewById(R.id.btnchallenge);
+
+        btnhomeanimation1 = AnimationUtils.loadAnimation(this, R.anim.btnhomeanimate1);
+        btnhomeanimation2 = AnimationUtils.loadAnimation(this, R.anim.btnhomeanimate2);
+        iconhomeanimatesetting = AnimationUtils.loadAnimation(this, R.anim.iconhomeanimatesetting);
+        iconhomeanimaterank = AnimationUtils.loadAnimation(this, R.anim.iconhomeanimaterank);
+        iconhomeanimaterule = AnimationUtils.loadAnimation(this, R.anim.iconhomeanimaterule);
+
+        btnquickmath.startAnimation(btnhomeanimation1);
+        btnchallenge.startAnimation(btnhomeanimation2);
+
+        soundOn.startAnimation(iconhomeanimatesetting);
+        rule.startAnimation(iconhomeanimaterule);
+        rank.startAnimation(iconhomeanimaterank);
+
+        Typeface SolwayBold = Typeface.createFromAsset(getAssets(), "fonts/SolwayBold.ttf");
+        btnquickmath.setTypeface(SolwayBold);
+        btnchallenge.setTypeface(SolwayBold);
+
+
         //Bind Music Service
         doBindService();
         Intent music = new Intent();
@@ -55,37 +80,21 @@ public class MainActivity extends AppCompatActivity {
         });
         mHomeWatcher.startWatch();
 
-        logo = findViewById(R.id.logo);
-
-        setting = findViewById(R.id.setting);
-        setting.setOnClickListener(new View.OnClickListener() {
+        soundOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog();
+                //  btnPlayClicked();
+                if(mIsBound){
+                    mServ.stopMusic();
+                    mIsBound = false;
+                    soundOn.setImageResource(R.drawable.soundoff);
+                } else {
+                    mServ.startMusic();
+                    mIsBound = true;
+                    soundOn.setImageResource(R.drawable.soundon);
+                }
             }
         });
-
-        rank = findViewById(R.id.rank);
-        rule = findViewById(R.id.rule);
-        btnquickmath = findViewById(R.id.btnquickmath);
-        btnchallenge = findViewById(R.id.btnchallenge);
-
-        btnhomeanimation1 = AnimationUtils.loadAnimation(this, R.anim.btnhomeanimate1);
-        btnhomeanimation2 = AnimationUtils.loadAnimation(this, R.anim.btnhomeanimate2);
-        iconhomeanimatesetting = AnimationUtils.loadAnimation(this, R.anim.iconhomeanimatesetting);
-        iconhomeanimaterank = AnimationUtils.loadAnimation(this, R.anim.iconhomeanimaterank);
-        iconhomeanimaterule = AnimationUtils.loadAnimation(this, R.anim.iconhomeanimaterule);
-
-        btnquickmath.startAnimation(btnhomeanimation1);
-        btnchallenge.startAnimation(btnhomeanimation2);
-
-        setting.startAnimation(iconhomeanimatesetting);
-        rule.startAnimation(iconhomeanimaterule);
-        rank.startAnimation(iconhomeanimaterank);
-
-        Typeface SolwayBold = Typeface.createFromAsset(getAssets(), "fonts/SolwayBold.ttf");
-        btnquickmath.setTypeface(SolwayBold);
-        btnchallenge.setTypeface(SolwayBold);
 
     }
 
@@ -159,52 +168,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void showDialog(){
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View view = inflater.inflate(R.layout.alert_dialog_setting, null);
-
-        soundOn = view.findViewById(R.id.soundOn);
-        info = view.findViewById(R.id.info);
-        close = view.findViewById(R.id.close);
-
-        soundOn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                btnPlayClicked();
-                if(mIsBound){
-                    mServ.stopMusic();
-                    mIsBound = false;
-                    soundOn.setImageResource(R.drawable.soundoff);
-                } else {
-                    mServ.startMusic();
-                    mIsBound = true;
-                    soundOn.setImageResource(R.drawable.soundon);
-                }
-            }
-        });
-
-        info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnCloseClicked();
-            }
-        });
-
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
-                .setView(view)
-                .create();
-        alertDialog.setCanceledOnTouchOutside(false);
-
-        alertDialog.show();
-    }
-
     public void btnQuickMathClicked(View view){
         Intent intent = new Intent(this, Level.class);
         startActivity(intent);
@@ -213,19 +176,6 @@ public class MainActivity extends AppCompatActivity {
     public void btnChallengeClicked(View view){
         Intent intent = new Intent(this, ChallengeActivity.class);
         startActivity(intent);
-    }
-
-//    public void settingClicked(){
-//        Intent intent = new Intent(this, SettingActivity.class);
-//        startActivity(intent);
-//
-//    }
-
-    private void btnCloseClicked(){
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
     }
 
     public void rankClicked(View view){
@@ -238,5 +188,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    public void infoclicked(View view) {
+        Intent intent = new Intent(this, Info.class);
+        startActivity(intent);
+    }
 }

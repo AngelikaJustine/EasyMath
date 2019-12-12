@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LevelFive"></activity>
+        <activity android:name=".Info"></activity>
+        <activity android:name=".LevelFive" />
         <activity android:name=".LevelFour" />
         <activity android:name=".LevelThree" />
         <activity android:name=".LevelTwo" />
@@ -19,7 +20,6 @@
             android:name=".MusicService"
             android:enabled="true" />
 
-        <activity android:name=".SettingActivity" />
         <activity android:name=".RankActivity" />
         <activity android:name=".RuleActivity" />
         <activity android:name=".ChallengeActivity" />
