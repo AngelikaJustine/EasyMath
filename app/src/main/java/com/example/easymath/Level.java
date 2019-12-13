@@ -39,25 +39,30 @@ public class Level extends AppCompatActivity {
     public void btnLvl1Clicked(View view) {
         Intent intent = new Intent(this, LevelOne.class);
         startActivity(intent);
+        finish();
     }
 
     public void btnLvl2Clicked(View view) {
         Intent intent = new Intent(this, LevelTwo.class);
         startActivity(intent);
+        finish();
     }
 
     public void btnLvl3Clicked(View view) {
         Intent intent = new Intent(this, LevelThree.class);
         startActivity(intent);
+        finish();
     }
 
     public void btnLvl4Clicked(View view) {
         Intent intent = new Intent(this, LevelFour.class);
         startActivity(intent);
+        finish();
     }
 
     public void btnLvl5Clicked(View view) {
         Intent intent = new Intent(this, LevelFive.class);
         startActivity(intent);
+        finish();
     }
 }

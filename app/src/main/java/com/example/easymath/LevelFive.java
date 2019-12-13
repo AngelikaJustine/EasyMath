@@ -45,9 +45,8 @@ public class LevelFive extends AppCompatActivity {
 
         numberQuestion.setText(String.valueOf(totalQuestion));
 
-        checkcoin();
-
         buttonresetall();
+        checkcoin();
 
         s = random.nextInt(2);
 
@@ -120,6 +119,11 @@ public class LevelFive extends AppCompatActivity {
         btnans2.setBackgroundColor(Color.rgb(253, 242, 254));
         btnans3.setBackgroundColor(Color.rgb(253, 242, 254));
         btnans4.setBackgroundColor(Color.rgb(253, 242, 254));
+
+        Button fifty = findViewById(R.id.halfanswer);
+        fifty.setEnabled(true);
+        fifty.setAlpha(1);
+
     }
 
     private void checkcoin() {
@@ -129,11 +133,17 @@ public class LevelFive extends AppCompatActivity {
         if(coin < 3){
             skipquestion.setClickable(false);
             skipquestion.setAlpha(0);
+        } else {
+            skipquestion.setClickable(true);
+            skipquestion.setAlpha(1);
         }
 
         if(coin < 2){
             halfanswer.setClickable(false);
             halfanswer.setAlpha(0);
+        } else{
+            halfanswer.setClickable(true);
+            halfanswer.setAlpha(1);
         }
 
         totalcoin = findViewById(R.id.totalcoin);
@@ -287,7 +297,9 @@ public class LevelFive extends AppCompatActivity {
         else{
             chooseoff(3);
         }
-
+        Button fifty = findViewById(R.id.halfanswer);
+        fifty.setEnabled(false);
+        fifty.setAlpha(0);
     }
 
     private void chooseoff(int x) {
@@ -299,11 +311,7 @@ public class LevelFive extends AppCompatActivity {
 
         int off2 = random.nextInt(4);
 
-        while (off2 == x){
-            off2 = random.nextInt(4);
-        }
-
-        while (off2 == off1){
+        while (off2 == x || off2 == off1){
             off2 = random.nextInt(4);
         }
 
