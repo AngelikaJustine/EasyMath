@@ -28,13 +28,14 @@ public class RankActivity extends AppCompatActivity {
 
     TextView name1, name2, name3, score1, score2, score3;
     private DatabaseReference root;
-    private DatabaseReference rootOne;
-    private DatabaseReference rootTwo;
-    private DatabaseReference rootThree;
 
     private String name, score;
     private ArrayList<String> data;
     private ArrayList<ArrayList> allData;
+
+    private int h1, h2, h3;
+
+    private String name1fromdata, score1fromdata, name2fromdata, score2fromdata, name3fromdata, score3fromdata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,72 +71,20 @@ public class RankActivity extends AppCompatActivity {
                 ArrayList<String> data2 = allData.get(1);
                 ArrayList<String> data3 = allData.get(2);
 
-                String name1fromdata = data1.get(0);
-                String score1fromdata = data1.get(1);
+                name1fromdata = data1.get(0);
+                score1fromdata = data1.get(1);
 
-                String name2fromdata = data2.get(0);
-                String score2fromdata = data2.get(1);
+                name2fromdata = data2.get(0);
+                score2fromdata = data2.get(1);
 
-                String name3fromdata = data3.get(0);
-                String score3fromdata = data3.get(1);
+                name3fromdata = data3.get(0);
+                score3fromdata = data3.get(1);
 
-                int h1 = Integer.parseInt(score1fromdata);
-                int h2 = Integer.parseInt(score2fromdata);
-                int h3 = Integer.parseInt(score3fromdata);
+                h1 = Integer.parseInt(score1fromdata);
+                h2 = Integer.parseInt(score2fromdata);
+                h3 = Integer.parseInt(score3fromdata);
 
-                if(h1 >= h2 && h1 >= h3){
-                    name1.setText(name1fromdata);
-                    score1.setText(score1fromdata);
-
-                    if(h2 >= h3){
-                        name2.setText(name2fromdata);
-                        score2.setText(score2fromdata);
-
-                        name3.setText(name3fromdata);
-                        score3.setText(score3fromdata);
-                    }else{
-                        name2.setText(name3fromdata);
-                        score2.setText(score3fromdata);
-
-                        name3.setText(name2fromdata);
-                        score3.setText(score2fromdata);
-                    }
-                }
-                else if(h2 >= h1 && h2 >= h3){
-                    name1.setText(name2fromdata);
-                    score1.setText(score2fromdata);
-
-                    if(h1 >= h3){
-                        name2.setText(name1fromdata);
-                        score2.setText(score1fromdata);
-
-                        name3.setText(name3fromdata);
-                        score3.setText(score3fromdata);
-                    }else{
-                        name2.setText(name3fromdata);
-                        score2.setText(score3fromdata);
-
-                        name3.setText(name1fromdata);
-                        score3.setText(score1fromdata);
-                    }
-                }else{
-                    name1.setText(name3fromdata);
-                    score1.setText(score3fromdata);
-
-                    if(h1 >= h2){
-                        name2.setText(name1fromdata);
-                        score2.setText(score1fromdata);
-
-                        name3.setText(name2fromdata);
-                        score3.setText(score2fromdata);
-                    }else{
-                        name2.setText(name2fromdata);
-                        score2.setText(score2fromdata);
-
-                        name3.setText(name1fromdata);
-                        score3.setText(score1fromdata);
-                    }
-                }
+                printbaseonscore();
 
             }
 
@@ -145,6 +94,62 @@ public class RankActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void printbaseonscore() {
+        if(h1 >= h2 && h1 >= h3){
+            name1.setText(name1fromdata);
+            score1.setText(score1fromdata);
+
+            if(h2 >= h3){
+                name2.setText(name2fromdata);
+                score2.setText(score2fromdata);
+
+                name3.setText(name3fromdata);
+                score3.setText(score3fromdata);
+            }else{
+                name2.setText(name3fromdata);
+                score2.setText(score3fromdata);
+
+                name3.setText(name2fromdata);
+                score3.setText(score2fromdata);
+            }
+        }
+        else if(h2 >= h1 && h2 >= h3){
+            name1.setText(name2fromdata);
+            score1.setText(score2fromdata);
+
+            if(h1 >= h3){
+                name2.setText(name1fromdata);
+                score2.setText(score1fromdata);
+
+                name3.setText(name3fromdata);
+                score3.setText(score3fromdata);
+            }else{
+                name2.setText(name3fromdata);
+                score2.setText(score3fromdata);
+
+                name3.setText(name1fromdata);
+                score3.setText(score1fromdata);
+            }
+        }else{
+            name1.setText(name3fromdata);
+            score1.setText(score3fromdata);
+
+            if(h1 >= h2){
+                name2.setText(name1fromdata);
+                score2.setText(score1fromdata);
+
+                name3.setText(name2fromdata);
+                score3.setText(score2fromdata);
+            }else{
+                name2.setText(name2fromdata);
+                score2.setText(score2fromdata);
+
+                name3.setText(name1fromdata);
+                score3.setText(score1fromdata);
+            }
+        }
     }
 
 

@@ -3,6 +3,7 @@ package com.example.easymath;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -13,7 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
 
@@ -32,13 +35,28 @@ public class ChallengeActivity extends AppCompatActivity {
     private int numb1, numb2, numb3, s1, s2;
     private int total;
     private int totalQuestion, totalRight;
+    private String question;
 
     private Random random = new Random();
+
+    Context context;
+    CharSequence textRight, textFalse;
+    int duration;
+    Toast toast;
+
+    ArrayList<String> arrayOfIncorrect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge);
+
+        context = getApplicationContext();
+        duration = 500;
+        textRight = "Correct";
+        textFalse = "Incorrect";
+
+        arrayOfIncorrect = new ArrayList<>();
 
         countDown = findViewById(R.id.countDown);
         txtallquestionchallenge = findViewById(R.id.txtallquestionchallenge);
@@ -81,14 +99,16 @@ public class ChallengeActivity extends AppCompatActivity {
             public void onFinish() {
 
                 mTimerRunning = false;
-                gameOver();
-
+//                gameOver();
+                goToReview();
             }
         }.start();
 
         mTimerRunning = true;
 
     }
+
+
 
     private void gameOver() {
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -131,6 +151,13 @@ public class ChallengeActivity extends AppCompatActivity {
     private void btnQuitClicked(){
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void goToReview() {
+        Intent intent = new Intent(this, Review.class);
+        intent.putStringArrayListExtra("listofincorrect", arrayOfIncorrect);
         startActivity(intent);
         finish();
     }
@@ -236,9 +263,9 @@ public class ChallengeActivity extends AppCompatActivity {
 
     private void printQuestion(){
 
-        String temp = numb1 + printQuestionSymbol(s1) + numb2 + printQuestionSymbol(s2) + numb3;
+        question = numb1 + printQuestionSymbol(s1) + numb2 + printQuestionSymbol(s2) + numb3;
         challengequestion = findViewById(R.id.challengequestion);
-        challengequestion.setText(temp);
+        challengequestion.setText(question);
 
     }
 
@@ -348,10 +375,14 @@ public class ChallengeActivity extends AppCompatActivity {
         if(values == total) {
             btn.setBackgroundColor(Color.rgb(142, 255, 142));
             totalRight = totalRight + 1;
+            toast = Toast.makeText(context, textRight, duration);
+            toast.show();
         }
         else{
             btn.setBackgroundColor(Color.rgb(255, 88, 88));
-
+            toast = Toast.makeText(context, textFalse, duration);
+            toast.show();
+            arrayOfIncorrect.add(question);
         }
 
         final Button finalBtn = btn;
