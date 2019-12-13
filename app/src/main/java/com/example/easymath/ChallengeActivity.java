@@ -1,5 +1,6 @@
 package com.example.easymath;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -16,8 +17,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 
 public class ChallengeActivity extends AppCompatActivity {
@@ -45,6 +55,14 @@ public class ChallengeActivity extends AppCompatActivity {
     Toast toast;
 
     ArrayList<String> arrayOfIncorrect;
+
+    private DatabaseReference root;
+    private String name, score;
+    private ArrayList<String> data;
+    private ArrayList<ArrayList> allData;
+    private int h1, h2, h3;
+    private String name1fromdata, score1fromdata, name2fromdata, score2fromdata, name3fromdata, score3fromdata;
+    Map<String, Object> map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,16 +117,198 @@ public class ChallengeActivity extends AppCompatActivity {
             public void onFinish() {
 
                 mTimerRunning = false;
-//                gameOver();
-                goToReview();
+
+                if(totalRight * 10 <= h3){
+//                    gameOver();
+                    goToReview();
+                }
+                else{
+                    updatehighscore();
+                }
             }
         }.start();
 
         mTimerRunning = true;
 
+//        FOR HIGHSCORE FROM FIREBASE
+        root = FirebaseDatabase.getInstance().getReference();
+
+        gethighscore();
+
     }
 
+    private void gethighscore() {
 
+        root = FirebaseDatabase.getInstance().getReference().getRoot();
+
+        root.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                allData = new ArrayList<>();
+                Iterator<DataSnapshot> items = dataSnapshot.getChildren().iterator();
+
+                while (items.hasNext()){
+                    data = new ArrayList<>();
+                    DataSnapshot item = items.next();
+                    name = item.child("name").getValue().toString();
+                    score = item.child("score").getValue().toString();
+                    data.add(name);
+                    data.add(score);
+                    allData.add(data);
+                }
+
+                ArrayList<String> data1 = allData.get(0);
+                ArrayList<String> data2 = allData.get(1);
+                ArrayList<String> data3 = allData.get(2);
+
+                name1fromdata = data1.get(0);
+                score1fromdata = data1.get(1);
+
+                name2fromdata = data2.get(0);
+                score2fromdata = data2.get(1);
+
+                name3fromdata = data3.get(0);
+                score3fromdata = data3.get(1);
+
+                h1 = Integer.parseInt(score1fromdata);
+                h2 = Integer.parseInt(score2fromdata);
+                h3 = Integer.parseInt(score3fromdata);
+
+                checkPosition();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void checkPosition() {
+
+        String temp2;
+        int temp1;
+
+        if(h1 >= h2 && h1 >= h3){
+            if(h2 < h3) {
+                temp1 = h3;
+                h3 = h2;
+                h2 = temp1;
+
+                temp2 = name3fromdata;
+                name3fromdata = name2fromdata;
+                name2fromdata = temp2;
+
+            }
+        }
+
+        else if(h2 >= h1 && h2 >= h3){
+
+            temp1 = h2;
+            h2 = h1;
+            h1 = temp1;
+
+            temp2 = name2fromdata;
+            name2fromdata = name1fromdata;
+            name1fromdata = temp2;
+
+            if(h2 < h3) {
+                temp1 = h3;
+                h3 = h2;
+                h2 = temp1;
+
+                temp2 = name3fromdata;
+                name3fromdata = name2fromdata;
+                name2fromdata = temp2;
+
+            }
+        }
+
+        else{
+            temp1 = h3;
+            h3 = h1;
+            h1 = temp1;
+
+            temp2 = name3fromdata;
+            name3fromdata = name1fromdata;
+            name1fromdata = temp2;
+
+            if(h2 < h3) {
+                temp1 = h3;
+                h3 = h2;
+                h2 = temp1;
+
+                temp2 = name3fromdata;
+                name3fromdata = name2fromdata;
+                name2fromdata = temp2;
+
+            }
+        }
+
+    }
+
+    private void updatehighscore() {
+
+        String newName = "TinkerBell";
+
+        if(totalRight * 10 > h1) {
+            updaterank1(newName);
+        }
+
+        else if (totalRight * 10 > h2){
+            updaterank2(newName);
+        }
+
+        else if(totalRight * 10 > h3){
+            updaterank3(newName);
+        }
+
+    }
+
+    private void updaterank3(String newName) {
+        map = new HashMap<String, Object>();
+
+        root.child("three").removeValue();
+        map.put("name", newName);
+        map.put("score", totalRight * 10);
+        root.child("three").updateChildren(map);
+    }
+
+    private void updaterank2(String newName) {
+
+        map = new HashMap<String, Object>();
+
+        root.child("two").removeValue();
+        map.put("name", newName);
+        map.put("score", totalRight * 10);
+        root.child("two").updateChildren(map);
+
+        root.child("three").removeValue();
+        map.put("name", name2fromdata);
+        map.put("score", h2);
+        root.child("three").updateChildren(map);
+    }
+
+    private void updaterank1(String newName) {
+        map = new HashMap<String, Object>();
+
+        root.child("one").removeValue();
+        map.put("name", newName);
+        map.put("score", totalRight * 10);
+        root.child("one").updateChildren(map);
+
+        root.child("two").removeValue();
+        map.put("name", name1fromdata);
+        map.put("score", h1);
+        root.child("two").updateChildren(map);
+
+        root.child("three").removeValue();
+        map.put("name", name2fromdata);
+        map.put("score", h2);
+        root.child("three").updateChildren(map);
+    }
 
     private void gameOver() {
         LayoutInflater inflater = LayoutInflater.from(this);

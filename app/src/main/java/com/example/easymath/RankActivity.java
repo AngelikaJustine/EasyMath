@@ -42,7 +42,7 @@ public class RankActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rank);
 
-        root = FirebaseDatabase.getInstance().getReference();
+        root = FirebaseDatabase.getInstance().getReference().getRoot();
 
         name1 = findViewById(R.id.name1);
         name2 = findViewById(R.id.name2);
