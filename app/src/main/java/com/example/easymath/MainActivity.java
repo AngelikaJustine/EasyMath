@@ -22,9 +22,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     Button btnquickmath, btnchallenge;
-    ImageView logo, setting, rank, rule, soundOn, info;
-    TextView close;
-    Animation btnhomeanimation1, btnhomeanimation2, iconhomeanimatesetting, iconhomeanimaterank, iconhomeanimaterule;
+    ImageView logo, rank, rule, soundOn, info;
+    Animation btnhomeanimation1, btnhomeanimation2, iconhomeanimatesetting, iconhomeanimaterank, iconhomeanimaterule, infoanimate;
     HomeWatcher mHomeWatcher;
 
     @Override
@@ -38,12 +37,14 @@ public class MainActivity extends AppCompatActivity {
         rule = findViewById(R.id.rule);
         btnquickmath = findViewById(R.id.btnquickmath);
         btnchallenge = findViewById(R.id.btnchallenge);
+        info = findViewById(R.id.info);
 
         btnhomeanimation1 = AnimationUtils.loadAnimation(this, R.anim.btnhomeanimate1);
         btnhomeanimation2 = AnimationUtils.loadAnimation(this, R.anim.btnhomeanimate2);
         iconhomeanimatesetting = AnimationUtils.loadAnimation(this, R.anim.iconhomeanimatesetting);
         iconhomeanimaterank = AnimationUtils.loadAnimation(this, R.anim.iconhomeanimaterank);
         iconhomeanimaterule = AnimationUtils.loadAnimation(this, R.anim.iconhomeanimaterule);
+        infoanimate = AnimationUtils.loadAnimation(this, R.anim.infoanimate);
 
         btnquickmath.startAnimation(btnhomeanimation1);
         btnchallenge.startAnimation(btnhomeanimation2);
@@ -51,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         soundOn.startAnimation(iconhomeanimatesetting);
         rule.startAnimation(iconhomeanimaterule);
         rank.startAnimation(iconhomeanimaterank);
+
+        info.startAnimation(infoanimate);
 
         Typeface SolwayBold = Typeface.createFromAsset(getAssets(), "fonts/SolwayBold.ttf");
         btnquickmath.setTypeface(SolwayBold);

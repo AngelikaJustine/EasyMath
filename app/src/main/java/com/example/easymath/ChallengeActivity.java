@@ -132,7 +132,6 @@ public class ChallengeActivity extends AppCompatActivity {
 
 //        FOR HIGHSCORE FROM FIREBASE
         root = FirebaseDatabase.getInstance().getReference();
-
         gethighscore();
 
     }
@@ -582,6 +581,7 @@ public class ChallengeActivity extends AppCompatActivity {
             btn.setBackgroundColor(Color.rgb(255, 88, 88));
             toast = Toast.makeText(context, textFalse, duration);
             toast.show();
+            question = question + " = " + total;
             arrayOfIncorrect.add(question);
         }
 
@@ -604,5 +604,10 @@ public class ChallengeActivity extends AppCompatActivity {
 
         txtallquestionchallenge.setText(String.valueOf(totalQuestion));
         txttrueanswerchallenge.setText(String.valueOf(totalRight));
+    }
+
+    public void endGame(View view) {
+        mCountDownTimer.cancel();
+        gameOver();
     }
 }

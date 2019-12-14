@@ -11,7 +11,7 @@
         android:id="@+id/info"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/info"
+        android:src="@drawable/info2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.005"

@@ -2,7 +2,9 @@ package com.example.easymath;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,6 +29,9 @@ public class LevelOne extends AppCompatActivity {
     private Random random = new Random();
 
     boolean NextQuestion;
+
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,11 +213,20 @@ public class LevelOne extends AppCompatActivity {
             }
             else{
                 // Pop up for stop game to next level
+                unlockNextLevel();
                 nextlevel();
             }
 
         }
 
+    }
+
+    private void unlockNextLevel() {
+        pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        editor = pref.edit();
+
+        editor.putInt("scoreLv1", totalQuestion);
+        editor.commit();
     }
 
     private void nextlevel() {

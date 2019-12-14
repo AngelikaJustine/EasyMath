@@ -78,11 +78,13 @@
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout1"
-        app:layout_constraintVertical_bias="0.115" />
+        app:layout_constraintVertical_bias="0.065" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -94,44 +96,41 @@
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/challengequestion"
-        app:layout_constraintVertical_bias="0.596">
+        app:layout_constraintVertical_bias="0.315">
 
         <Button
             android:id="@+id/btnans1"
             android:layout_width="156dp"
             android:layout_height="164dp"
-            android:elevation="5dp"
             android:background="@color/white"
-            android:text="27"
-            android:textSize="40sp"
+            android:elevation="5dp"
             android:onClick="btnClicked"
-            />
+            android:text="27"
+            android:textSize="40sp" />
 
         <Button
             android:id="@+id/btnans3"
             android:layout_width="156dp"
             android:layout_height="164dp"
-            android:elevation="5dp"
             android:layout_below="@+id/btnans1"
             android:layout_marginTop="40dp"
             android:background="@color/white"
-            android:text="37"
-            android:textSize="40sp"
+            android:elevation="5dp"
             android:onClick="btnClicked"
-            />
+            android:text="37"
+            android:textSize="40sp" />
 
         <Button
             android:id="@+id/btnans2"
             android:layout_width="156dp"
             android:layout_height="164dp"
-            android:elevation="5dp"
             android:layout_marginLeft="40dp"
             android:layout_toRightOf="@+id/btnans1"
             android:background="@color/white"
-            android:text="30"
-            android:textSize="40sp"
+            android:elevation="5dp"
             android:onClick="btnClicked"
-            />
+            android:text="30"
+            android:textSize="40sp" />
 
         <Button
             android:id="@+id/btnans4"
@@ -142,12 +141,28 @@
             android:layout_marginTop="40dp"
             android:layout_toRightOf="@+id/btnans3"
             android:background="@color/white"
-            android:text="40"
-            android:textSize="40sp"
             android:onClick="btnClicked"
-            />
+            android:text="40"
+            android:textSize="40sp" />
 
     </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="294dp"
+        android:layout_marginBottom="26dp"
+        android:background="@color/green"
+        android:text="BACK"
+        android:textColor="@color/black"
+        android:fontFamily="@font/solwaymedium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        android:onClick="endGame"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
