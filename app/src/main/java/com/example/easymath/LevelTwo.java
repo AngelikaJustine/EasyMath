@@ -2,12 +2,14 @@ package com.example.easymath;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -226,12 +228,63 @@ public class LevelTwo extends AppCompatActivity {
         else {
             if(totalQuestion != 10){
                 // Pop up for stop game before correct 10
-                backtolevel();
+                LayoutInflater inflater = LayoutInflater.from(this);
+                View views = inflater.inflate(R.layout.alert_dialog_l2, null);
+
+                Button playButton = views.findViewById(R.id.playButton);
+                Button quitButton = views.findViewById(R.id.quitButton);
+
+                playButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        btnPlayClicked();
+                    }
+                });
+
+                quitButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                        btnQuitClicked();
+                        backtolevel();
+                    }
+                });
+
+                AlertDialog alertDialog = new AlertDialog.Builder(this)
+                        .setView(views)
+                        .create();
+                alertDialog.setCanceledOnTouchOutside(false);
+
+                alertDialog.show();
             }
             else{
-                // Pop up for stop game to next level
                 unlockNextLevel();
-                nextlevel();
+                // Pop up for stop game to next level
+                LayoutInflater inflater = LayoutInflater.from(this);
+                View views = inflater.inflate(R.layout.alert_dialog_l2_next, null);
+
+                Button playButton = views.findViewById(R.id.playButton);
+                Button quitButton = views.findViewById(R.id.quitButton);
+
+                playButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        nextlevel();
+                    }
+                });
+
+                quitButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        backtolevel();
+                    }
+                });
+
+                AlertDialog alertDialog = new AlertDialog.Builder(this)
+                        .setView(views)
+                        .create();
+                alertDialog.setCanceledOnTouchOutside(false);
+
+                alertDialog.show();
             }
 
         }
@@ -248,6 +301,12 @@ public class LevelTwo extends AppCompatActivity {
 
     private void nextlevel() {
         Intent intent = new Intent(this, LevelThree.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void btnPlayClicked(){
+        Intent intent = new Intent(this, LevelTwo.class);
         startActivity(intent);
         finish();
     }

@@ -309,9 +309,9 @@ public class ChallengeActivity extends AppCompatActivity {
         root.child("three").updateChildren(map);
     }
 
-    private void gameOver() {
+    private void backToMain(){
         LayoutInflater inflater = LayoutInflater.from(this);
-        View view = inflater.inflate(R.layout.alert_dialog, null);
+        View view = inflater.inflate(R.layout.alert_dialog_back, null);
 
         TextView score = view.findViewById(R.id.score);
         int totalScore = totalRight * 10;
@@ -322,14 +322,14 @@ public class ChallengeActivity extends AppCompatActivity {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnPlayClicked();
+                btnQuitClicked();
             }
         });
 
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnQuitClicked();
+                btnPlayClicked();
             }
         });
 
@@ -355,6 +355,47 @@ public class ChallengeActivity extends AppCompatActivity {
     }
 
     private void goToReview() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View views = inflater.inflate(R.layout.alert_dialog, null);
+
+        TextView score = views.findViewById(R.id.score);
+        int totalScore = totalRight * 10;
+        score.setText(String.valueOf(totalScore));
+        Button reviewButton = views.findViewById(R.id.reviewButton);
+        Button playButton = views.findViewById(R.id.playButton);
+        Button quitButton = views.findViewById(R.id.quitButton);
+
+        reviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                review();
+            }
+        });
+
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnPlayClicked();
+            }
+        });
+
+        quitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnQuitClicked();
+            }
+        });
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setView(views)
+                .create();
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        alertDialog.show();
+
+    }
+
+    private void review(){
         Intent intent = new Intent(this, Review.class);
         intent.putStringArrayListExtra("listofincorrect", arrayOfIncorrect);
         startActivity(intent);
@@ -608,6 +649,6 @@ public class ChallengeActivity extends AppCompatActivity {
 
     public void endGame(View view) {
         mCountDownTimer.cancel();
-        gameOver();
+        backToMain();
     }
 }
