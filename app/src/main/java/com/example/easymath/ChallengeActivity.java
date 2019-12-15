@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +58,7 @@ public class ChallengeActivity extends AppCompatActivity {
     ArrayList<String> arrayOfIncorrect;
 
     private DatabaseReference root;
-    private String name, score;
+    private String name, score, inputname;
     private ArrayList<String> data;
     private ArrayList<ArrayList> allData;
     private int h1, h2, h3;
@@ -126,7 +127,8 @@ public class ChallengeActivity extends AppCompatActivity {
                     goToReview();
                 }
                 else{
-                    updatehighscore("Feo");
+//                    updatehighscore("Feo");
+                    inputName();
                 }
             }
         }.start();
@@ -650,7 +652,31 @@ public class ChallengeActivity extends AppCompatActivity {
             backToMain();
         }
         else{
-            updatehighscore("Feo");
+            inputName();
+
         }
+    }
+
+    private void inputName(){
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View views = inflater.inflate(R.layout.alert_dialog_highscore, null);
+
+        Button enter = views.findViewById(R.id.enter);
+        final EditText nameinput = views.findViewById(R.id.nameinput);
+        inputname = nameinput.getText().toString();
+
+        enter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updatehighscore(inputname);
+            }
+        });
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setView(views)
+                .create();
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        alertDialog.show();
     }
 }
