@@ -104,6 +104,10 @@ public class ChallengeActivity extends AppCompatActivity {
         btnans3.setTypeface(SolwayBold);
         btnans4.setTypeface(SolwayBold);
 
+//        FOR HIGHSCORE FROM FIREBASE
+        root = FirebaseDatabase.getInstance().getReference();
+        gethighscore();
+
         playgamechallenge();
 
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
@@ -119,20 +123,15 @@ public class ChallengeActivity extends AppCompatActivity {
                 mTimerRunning = false;
 
                 if(totalRight * 10 <= h3){
-//                    gameOver();
                     goToReview();
                 }
                 else{
-                    updatehighscore();
+                    updatehighscore("Feo");
                 }
             }
         }.start();
 
         mTimerRunning = true;
-
-//        FOR HIGHSCORE FROM FIREBASE
-        root = FirebaseDatabase.getInstance().getReference();
-        gethighscore();
 
     }
 
@@ -248,9 +247,7 @@ public class ChallengeActivity extends AppCompatActivity {
 
     }
 
-    private void updatehighscore() {
-
-        String newName = "TinkerBell";
+    private void updatehighscore(String newName) {
 
         if(totalRight * 10 > h1) {
             updaterank1(newName);
@@ -649,6 +646,11 @@ public class ChallengeActivity extends AppCompatActivity {
 
     public void endGame(View view) {
         mCountDownTimer.cancel();
-        backToMain();
+        if(totalRight * 10 <= h3){
+            backToMain();
+        }
+        else{
+            updatehighscore("Feo");
+        }
     }
 }
