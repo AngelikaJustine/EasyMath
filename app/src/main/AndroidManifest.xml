@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        android:appComponentFactory="Nikcname"
         <activity android:name=".Review"></activity>
         <activity android:name=".Info" />
         <activity android:name=".LevelFive" />
