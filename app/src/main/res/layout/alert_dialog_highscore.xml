@@ -80,6 +80,7 @@
         android:layout_height="60dp"
         android:paddingLeft="10dp"
         android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/solwaymedium"
         android:hint="Enter Nickname"
         android:background="@drawable/edit_round"/>
 

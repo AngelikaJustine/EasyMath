@@ -661,13 +661,21 @@ public class ChallengeActivity extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         View views = inflater.inflate(R.layout.alert_dialog_highscore, null);
 
+        TextView scr = views.findViewById(R.id.score);
+        scr.setText(String.valueOf(totalRight * 10));
+
         Button enter = views.findViewById(R.id.enter);
         final EditText nameinput = views.findViewById(R.id.nameinput);
-        inputname = nameinput.getText().toString();
 
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                inputname = nameinput.getText().toString();
+
+                if(inputname == null){
+                    inputname = "Unknown";
+                }
+
                 updatehighscore(inputname);
             }
         });
@@ -678,5 +686,6 @@ public class ChallengeActivity extends AppCompatActivity {
         alertDialog.setCanceledOnTouchOutside(false);
 
         alertDialog.show();
+        
     }
 }
