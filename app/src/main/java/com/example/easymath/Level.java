@@ -53,15 +53,19 @@ public class Level extends AppCompatActivity {
         }
         if (scoreLv1 == 10) {
             lvl2.setEnabled(true);
+            lvl2.setBackground(getResources().getDrawable(R.drawable.btnlevelunlock,null));
         }
         if (scoreLv2 == 10) {
             lvl3.setEnabled(true);
+            lvl3.setBackground(getResources().getDrawable(R.drawable.btnlevelunlock,null));
         }
         if (scoreLv3 == 10) {
             lvl4.setEnabled(true);
+            lvl4.setBackground(getResources().getDrawable(R.drawable.btnlevelunlock,null));
         }
         if (scoreLv4 == 10) {
             lvl5.setEnabled(true);
+            lvl5.setBackground(getResources().getDrawable(R.drawable.btnlevelunlock,null));
         }
     }
 

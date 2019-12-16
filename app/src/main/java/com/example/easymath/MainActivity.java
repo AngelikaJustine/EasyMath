@@ -8,10 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -26,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView logo, rank, rule, soundOn, info;
     Animation btnhomeanimation1, btnhomeanimation2, iconhomeanimatesetting, iconhomeanimaterank, iconhomeanimaterule, infoanimate;
     HomeWatcher mHomeWatcher;
+
+    SharedPreferences pref2;
+    SharedPreferences.Editor editor2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         btnquickmath.setTypeface(SolwayBold);
         btnchallenge.setTypeface(SolwayBold);
 
+        pref2 = getSharedPreferences("MyPref2", Context.MODE_PRIVATE);
+        editor2 = pref2.edit();
 
         //Bind Music Service
         doBindService();
@@ -87,24 +95,44 @@ public class MainActivity extends AppCompatActivity {
         soundOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  btnPlayClicked();
+
                 if(mIsBound){
                     mServ.stopMusic();
                     mIsBound = false;
                     soundOn.setImageResource(R.drawable.soundoff);
+
+                    editor2.putBoolean("mIsBound", false);
+                    editor2.commit();
                 } else {
                     mServ.startMusic();
                     mIsBound = true;
                     soundOn.setImageResource(R.drawable.soundon);
+
+                    editor2.putBoolean("mIsBound", true);
+                    editor2.commit();
                 }
             }
         });
-
+        
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(pref2!=null) {
+                    if (pref2.getBoolean("mIsBound", true)) {
+//                musicOn();
+                    }
+                    else {
+                        musicOff();
+                    }
+                }
+            }
+        }, 500);
 
     }
 
     private boolean mIsBound = false;
     private MusicService mServ;
+
     private ServiceConnection Scon = new ServiceConnection(){
 
         public void onServiceConnected(ComponentName name, IBinder
@@ -196,5 +224,17 @@ public class MainActivity extends AppCompatActivity {
     public void infoclicked(View view) {
         Intent intent = new Intent(this, Info.class);
         startActivity(intent);
+    }
+
+    private void musicOn(){
+        mServ.startMusic();
+        mIsBound = true;
+        soundOn.setImageResource(R.drawable.soundon);
+    }
+
+    private void musicOff(){
+        mServ.stopMusic();
+        mIsBound = false;
+        soundOn.setImageResource(R.drawable.soundoff);
     }
 }

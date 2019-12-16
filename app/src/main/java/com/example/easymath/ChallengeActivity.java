@@ -628,13 +628,7 @@ public class ChallengeActivity extends AppCompatActivity {
         final Button finalBtn = btn;
         updateTotalQuestion();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                finalBtn.setBackgroundColor(Color.rgb(253, 242, 254));
-                playgamechallenge();
-            }
-        }, 500);
+
 
     }
 
