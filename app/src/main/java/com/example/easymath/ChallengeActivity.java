@@ -33,7 +33,7 @@ import java.util.Random;
 
 public class ChallengeActivity extends AppCompatActivity {
 
-    private static final long START_TIME_IN_MILLIS = 60000;
+    private static final long START_TIME_IN_MILLIS = 300000;
 
     private TextView countDown, ofChallenge, txttrueanswerchallenge, txtallquestionchallenge;
     private CountDownTimer mCountDownTimer;
